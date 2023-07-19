@@ -25,9 +25,7 @@ class Chatbot {
 
     async fetchMessage(message) {
         try {
-            const translation = await translate(message, { to: "en" });
-            const url = `https://smart-chat-cyan.vercel.app/?message=${encodeURIComponent(translation)}`;
-
+            const url = `https://smart-chat-cyan.vercel.app/?message=${encodeURIComponent(message)}`;
             const res = await fetch(url);
             const data = await res.json();
             if (!data || !data.message) {

@@ -1,8 +1,6 @@
 # Smart Chat
 
 
-![F4pEry6](https://nodei.co/npm/npm-smart-chat.png?downloads=true&stars=true)
-
 <a href="https://www.npmjs.com/package/npm-smart-chat">
 <img src="https://img.shields.io/npm/dt/npm-smart-chat?color=CC3534&logo=npm&style=for-the-badge" alt="Downloads">
 </a>

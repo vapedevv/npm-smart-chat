@@ -11,7 +11,7 @@
 <img src="https://img.shields.io/npm/v/npm-smart-chat?color=red&label=Version&logo=npm&style=for-the-badge" alt="Npm version">
 </a>
 
-- Easy to use NPM package for chatbots made by VP Development.
+- Easy to use NPM package for chatbots made by Voxy Development.
 
 ## Installation
 
@@ -36,7 +36,7 @@ chat.chat('Hey! How are you!').then(reply => {
 
 
 ## Credits
-- Created by VP Development (vapeuyy).
+- Created by Voxy Development (vapeuyy).
 - Translation is feasible using the google-translate-api, but please be aware that there _might_ be higher latency or ping times.
 
 ## Language List

@@ -1,50 +1,52 @@
-const express = require('express');
-const app = express();
+const fetch = require("node-fetch");
+const translate = require("@vitalets/google-translate-api");
 
-// Middleware
-app.use(express.json());
+class Chatbot {
+    constructor(ops = {}) {
+        this.defaultOptions = {
+            language: "en"
+        };
+        this.ops = { ...this.defaultOptions, ...ops };
+    }
 
-function findArrayValue(array, word) {
-    const min = 1;
-    const max = 1080;
-    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    async chat(message) {
+        if (!message || typeof message !== "string") {
+            throw new Error("[Chatbot API] You need to provide a valid message to reply to!");
+        }
 
-    for (let i = randomNumber; i < array.length; i++) {
-        if (array[i].includes(word)) {
-            console.log(array)
-            return array[i];
+        try {
+            const response = await this.fetchMessage(message);
+            const translation = await this.translateMessage(response.message);
+            return translation.text;
+        } catch (error) {
+            throw new Error(`[Chatbot API] An error occurred: ${error.message}`);
         }
     }
-    return "not_found";
+
+    async fetchMessage(message) {
+        try {
+            const translation = await translate(message, { from: this.ops.language, to: "en" });
+            const url = `https://smart-chat-cyan.vercel.app/?message=${encodeURIComponent(translation.text)}`;
+            const res = await fetch(url);
+            const data = await res.json();
+
+            if (!data || !data.message) {
+                throw new Error("[Chatbot API] Invalid response from Chatbot API");
+            }
+            return data;
+        } catch (error) {
+            throw new Error(`[Chatbot API] Failed to fetch message: ${error.message}`);
+        }
+    }
+
+    async translateMessage(message) {
+        try {
+            const translation = await translate(message, { from: "en", to: this.ops.language });
+            return translation;
+        } catch (error) {
+            throw new Error(`[Chatbot API] Failed to translate message: ${error.message}`);
+        }
+    }
 }
 
-// Routes
-
-app.get('/', (req, res) => {
-    const query = req.query.message.toLowerCase();
-    const messageArray = require("./respuestas.json").phrases;
-    let message;
-
-    if (query) {
-
-        if(query === "hello") message = result;
-
-        const result = 
-        findArrayValue(messageArray, query);
-        if (result !== "not_found") {
-            message = result;
-        } else {
-            const messageRandom = Math.floor(Math.random() * messageArray.length);
-            message = messageArray[messageRandom];
-        }
-    } else {
-        const messageRandom = Math.floor(Math.random() * messageArray.length);
-        message = messageArray[messageRandom];
-    }
-
-    res.json({
-        message: message
-    });
-});
-
-module.exports = app;
+module.exports = Chatbot;

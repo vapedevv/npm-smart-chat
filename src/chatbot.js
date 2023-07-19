@@ -4,7 +4,8 @@ const translate = require("@vitalets/google-translate-api");
 class Chatbot {
     constructor(ops = {}) {
         this.defaultOptions = {
-            language: "en"
+            language: "en",
+            user: "233"
         };
         this.ops = { ...this.defaultOptions, ...ops };
     }
@@ -26,7 +27,7 @@ class Chatbot {
     async fetchMessage(message) {
         try {
             const translation = await translate(message, { from: this.ops.language, to: "en" });
-            const url = `https://smart-chat-cyan.vercel.app/?message=${encodeURIComponent(translation.text)}`;
+            const url = `https://smart-chat-cyan.vercel.app/?message=${encodeURIComponent(translation.text)}?user=${encodeURIComponent(translation.text)}`;
             const res = await fetch(url);
             const data = await res.json();
 

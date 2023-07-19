@@ -22,7 +22,7 @@ npm i npm-smart-chat
 
 ```javascript
 const Chat = require("npm-smart-chat");
-const chat = new Chat({ language: "Specify a language here" }); //REQUIRED
+const chat = new Chat({ language: "Specify a language here", user: "Specify a user here" }); //REQUIRED
 
 chat.chat('Hey! How are you!').then(reply => {
   console.log(reply);

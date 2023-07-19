@@ -1,7 +1,7 @@
 {
   "name": "npm-smart-chat",
-  "version": "1.0.1",
-  "description": "Easy to use NPM package for chatbots made by VP Development.",
+  "version": "1.0.64",
+  "description": "Easy to use NPM package for chatbots made by Voxy Development.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

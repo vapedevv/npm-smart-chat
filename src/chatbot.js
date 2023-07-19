@@ -11,7 +11,7 @@ class Chatbot {
 
     async chat(message) {
         if (!message || typeof message !== "string") {
-            throw new Error("[Chatbot API] You need to provide a valid message to reply to!");
+            throw new Error("You need to provide a valid message to reply to!");
         }
 
         try {
@@ -19,7 +19,7 @@ class Chatbot {
             const translation = await this.translateMessage(response.message);
             return translation.text;
         } catch (error) {
-            throw new Error(`[Chatbot API] An error occurred: ${error.message}`);
+            throw new Error(`An error occurred: ${error.message}`);
         }
     }
 
@@ -35,7 +35,7 @@ class Chatbot {
             }
             return data;
         } catch (error) {
-            throw new Error(`[Chatbot API] Failed to fetch message: ${error.message}`);
+            throw new Error(`Failed to fetch message: ${error.message}`);
         }
     }
 
@@ -44,7 +44,7 @@ class Chatbot {
             const translation = await translate(message, { from: "en", to: this.ops.language });
             return translation;
         } catch (error) {
-            throw new Error(`[Chatbot API] Failed to translate message: ${error.message}`);
+            throw new Error(`Failed to translate message: ${error.message}`);
         }
     }
 }

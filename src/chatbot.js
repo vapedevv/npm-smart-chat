@@ -25,9 +25,11 @@ class Chatbot {
 
     async fetchMessage(message) {
         try {
-            const url = `https://smart-chat-cyan.vercel.app/?message=${encodeURIComponent(message)}`;
+            const translation = await translate(message, { from: this.ops.language, to: "en" });
+            const url = `https://smart-chat-cyan.vercel.app/?message=${encodeURIComponent(translation.text)}`;
             const res = await fetch(url);
             const data = await res.json();
+
             if (!data || !data.message) {
                 throw new Error("[Chatbot API] Invalid response from Chatbot API");
             }
@@ -39,7 +41,7 @@ class Chatbot {
 
     async translateMessage(message) {
         try {
-            const translation = await translate(message, { to: this.ops.language });
+            const translation = await translate(message, { from: "en", to: this.ops.language });
             return translation;
         } catch (error) {
             throw new Error(`[Chatbot API] Failed to translate message: ${error.message}`);

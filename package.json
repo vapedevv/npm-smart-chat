@@ -1,6 +1,6 @@
 {
   "name": "npm-smart-chat",
-  "version": "1.0.64",
+  "version": "1.0.66",
   "description": "Easy to use NPM package for chatbots made by Voxy Development.",
   "main": "index.js",
   "scripts": {
